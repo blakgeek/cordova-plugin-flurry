@@ -22,19 +22,18 @@
 
 #pragma mark Flurry Plugin
 
-@interface CDVFlurry : CDVPlugin <FlurryAdDelegate> {
+@interface CDVFlurryInterstitial : CDVPlugin <FlurryAdDelegate> {
+    
+    NSString* publisherId;
+    BOOL adShow;
 }
 
-@property (assign) BOOL bannerAtTop;
-@property (assign) int adSize;
-@property (assign) BOOL adShow;
 
-- (void)createBannerView:(CDVInvokedUrlCommand *)command;
-- (void)destroyBannerView:(CDVInvokedUrlCommand *)command;
+- (void)setPublisherId:(CDVInvokedUrlCommand*)command;
+- (void)createAdView:(CDVInvokedUrlCommand *)command;
+- (void)destroyAdView:(CDVInvokedUrlCommand *)command;
 - (void)requestAd:(CDVInvokedUrlCommand *)command;
 - (void)showAd:(CDVInvokedUrlCommand *)command;
-
-- (void)createInterstitialView:(CDVInvokedUrlCommand *)command;
-- (void)requestInterstitialAd:(CDVInvokedUrlCommand *)command;
+- (void)enableDebug:(CDVInvokedUrlCommand *)command;
 
 @end

@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	id="com.rjfun.cordova.plugin.flurry"
-	version="1.0.0">
-      
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="com.rjfun.cordova.plugin.flurry" version="1.0.0">
+
     <name>FlurryAd</name>
-	<description>Add Flurry Ads to cordova app, earn more revenue with Flurry for publishers</description>
-	<author>Raymond Xie Liming</author>
-	<license>MIT</license>
+    <description>Add Flurry Ads to cordova app, earn more revenue with Flurry for publishers</description>
+    <author>Raymond Xie Liming</author>
+    <license>MIT</license>
     <keywords>ad,ads,flurry,admob</keywords>
     <repo>https://github.com/floatinghotpot/cordova-plugin-flurry.git</repo>
     <issue>https://github.com/floatinghotpot/cordova-plugin-flurry/issues</issue>
 
-	<engines>
-	    <engine name="cordova" version=">=3.0" />
-	</engines>
+    <engines>
+        <engine name="cordova" version=">=3.0" />
+    </engines>
 
     <js-module src="www/Flurry.js" name="Flurry">
         <clobbers target="window.plugins.Flurry" />
@@ -23,26 +20,35 @@
 
     <!-- android -->
     <platform name="android">
-        <dependency id="com.google.admobsdk-googleplay" version=">=4.4.0"/>
-	<dependency id="com.flurry.sdk-android" version=">=4.0.0"/>
+        <dependency id="com.google.admobsdk-googleplay" version=">=4.4.0" />
+        <dependency id="com.flurry.sdk-android" version=">=4.0.0" />
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Flurry">
-                <param name="android-package" value="com.rjfun.cordova.plugin.Flurry"/>
+            <feature name="FlurryBanner">
+                <param name="android-package" value="com.rjfun.cordova.plugin.FlurryBanner" />
+            </feature>
+            <feature name="FlurryInterstitial">
+                <param name="android-package" value="com.rjfun.cordova.plugin.FlurryInterstitial" />
             </feature>
         </config-file>
-        <source-file src="src/android/Flurry.java" target-dir="src/com/rjfun/cordova/plugin" />
-     </platform>
-     
-     <!-- ios -->
-     <platform name="ios">    
-	 <dependency id="com.flurry.sdk-ios" version=">=5.1.0"/>
-         <config-file target="config.xml" parent="/*">
-             <feature name="Flurry">
-                 <param name="ios-package" value="CDVFlurry" />
-             </feature>
-         </config-file>
-         <header-file src="src/ios/CDVFlurry.h" />
-         <source-file src="src/ios/CDVFlurry.m" />
+        <source-file src="src/android/com/rjfun/cordova/plugin/FlurryBanner.java" target-dir="src/com/rjfun/cordova/plugin" />
+        <source-file src="src/android/com/rjfun/cordova/plugin/FlurryInterstitial.java" target-dir="src/com/rjfun/cordova/plugin" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <dependency id="com.flurry.sdk-ios" version=">=5.1.0" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="FlurryBanner">
+                <param name="ios-package" value="CDVFlurryBanner" />
+            </feature>
+            <feature name="FlurryInterstitial">
+                <param name="ios-package" value="CDVFlurryInterstitial" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CDVFlurryBanner.h" />
+        <source-file src="src/ios/CDVFlurryBanner.m" />
+        <header-file src="src/ios/CDVFlurryInterstitial.h" />
+        <source-file src="src/ios/CDVFlurryInterstitial.m" />
     </platform>
 
 </plugin>

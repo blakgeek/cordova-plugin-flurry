@@ -309,7 +309,7 @@ NSString* bottomBannerSpace = @"BOTTOM_BANNER";
     [FlurryAds displayAdForSpace:adSpace onView:self.webView.superview];
     
 	NSLog(@"%s: Received ad successfully.", __PRETTY_FUNCTION__);
-	[self writeJavascript:@"cordova.fireDocumentEvent('onReceiveAd');"];
+	[self.commandDelegate evalJs:@"cordova.fireDocumentEvent('onReceiveAd');"];
 }
 
 - (void) spaceDidFailToReceiveAd:(NSString*) adSpace error:(NSError *)error {
@@ -319,7 +319,7 @@ NSString* bottomBannerSpace = @"BOTTOM_BANNER";
 	NSString *jsString =
 		@"cordova.fireDocumentEvent('onFailedToReceiveAd',"
 		@"{ 'error': '%@' });";
-	[self writeJavascript:[NSString stringWithFormat:jsString, [error localizedFailureReason]]];
+	[self.commandDelegate evalJs:[NSString stringWithFormat:jsString, [error localizedFailureReason]]];
 }
 
 - (void) spaceDidFailToRender:(NSString *)space error:(NSError *)error {
@@ -329,28 +329,28 @@ NSString* bottomBannerSpace = @"BOTTOM_BANNER";
 	NSString *jsString =
     @"cordova.fireDocumentEvent('onFailedToRenderAd',"
     @"{ 'error': '%@' });";
-	[self writeJavascript:[NSString stringWithFormat:jsString, [error localizedFailureReason]]];
+	[self.commandDelegate evalJs:[NSString stringWithFormat:jsString, [error localizedFailureReason]]];
 }
 
 - (void) spaceWillLeaveApplication:(NSString *)adSpace {
-	//[self writeJavascript:@"cordova.fireDocumentEvent('onLeaveToAd');"];
+	//[self.commandDelegate evalJs:@"cordova.fireDocumentEvent('onLeaveToAd');"];
     NSLog( @"adViewWillLeaveApplication" );
 }
 
 - (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial {
-	[self writeJavascript:@"cordova.fireDocumentEvent('onPresentAd');"];
+	[self.commandDelegate evalJs:@"cordova.fireDocumentEvent('onPresentAd');"];
     NSLog( @"adViewWillPresentScreen" );
     
     return TRUE;
 }
 
 - (void) spaceWillDismiss:(NSString *)adSpace {
-	[self writeJavascript:@"cordova.fireDocumentEvent('onDismissAd');"];
+	[self.commandDelegate evalJs:@"cordova.fireDocumentEvent('onDismissAd');"];
     NSLog( @"adViewDismissScreen" );
 }
 
 - (void)spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial {
-	[self writeJavascript:@"cordova.fireDocumentEvent('onDidDismissAd');"];
+	[self.commandDelegate evalJs:@"cordova.fireDocumentEvent('onDidDismissAd');"];
     NSLog( @"adViewDidDismissScreen" );
 }
 
